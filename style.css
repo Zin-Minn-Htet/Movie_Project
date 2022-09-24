@@ -278,15 +278,16 @@ main{
 }
 
 #popular .movie-container .card .details h3{
-    font-size: 25px;
+    font-size: 18px;
     color: var(--text-color);
     letter-spacing: 3px;
 }
 
 #popular .movie-container .card .details span{
     background-color: var(--primary-color);
-    padding: 8px;
+    padding: 3px;
     border-radius: 5px;
+    font-size: 15px;
 }
 
 #popular .movie-container .card .overview{
@@ -314,4 +315,17 @@ main{
 #popular .movie-container .card .overview p{
     font-size: 16px;
     margin: 10px 0;
+}
+
+@media screen and (max-width : 900px) {
+    #popular .movie-container {
+        width: 90%;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width : 600px) {
+    #popular .movie-container {
+        width: 95%;
+        grid-template-columns: 1fr;
+    }
 }
