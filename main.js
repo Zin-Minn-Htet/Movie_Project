@@ -18,7 +18,11 @@ window.addEventListener("scroll",()=>{
 })
 
 document.querySelector(".scroll-top").addEventListener("click",()=>{
-    window.scroll(0,0);
+    window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
 })
 
 // Setting Toggle
@@ -48,6 +52,7 @@ const url = {
 
 const popularUrl = url.baseUrl+url.apiKey+"&sort_by=popularity.desc";
 const imgUrl = "https://image.tmdb.org/t/p/w500/";
+const searchUrl = "https://api.themoviedb.org/3/search/movie?"+url.apiKey;
 
 fetchMovie(popularUrl);
 
@@ -59,6 +64,8 @@ function fetchMovie(path){
 
 function showMovie(data){
     let res = data.results;
+
+    document.querySelector(".movie-container").innerHTML = "";
     
     res.forEach(movie =>{
         let div = document.createElement("div");
@@ -70,7 +77,7 @@ function showMovie(data){
         </div>
         <div class="details">
         <h3>${movie.original_title}</h3>
-        <span>${movie.popularity.toFixed(1)}</span>
+        <span>${movie.vote_average.toFixed(1)}</span>
         </div>
         <div class="overview">
         <h5>overview</h5>
@@ -85,5 +92,21 @@ function showMovie(data){
         
     })
 }
+
+// Search Movie
+
+document.querySelector("#search").addEventListener("keypress",(e)=> {
+    if(e.keyCode === 13){
+        let value = e.target.value;
+
+        if(value){
+            fetchMovie(searchUrl+"&query="+value)
+        }
+        else{
+            fetchMovie(popularUrl)
+        }
+    }
+})
+
 
 
